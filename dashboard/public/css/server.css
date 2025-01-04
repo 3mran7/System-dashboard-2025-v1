@@ -1,0 +1,278 @@
+.command-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    margin-bottom: 10px;
+    border: 0px solid #1D2C3A;
+    border-radius: 30px;
+    background-color: rgba(52, 73, 94, 0.7);
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.command-details:hover {
+    background-color: rgba(30, 41, 53, 0.7);
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.command-details h4 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #78B8E7; // لون اسماء الاختصارات للاوامر
+    transition: color 0.3s;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.command-details .controls {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.command-details .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+    margin-left: 10px;
+}
+
+.command-details .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.command-details .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #555;
+    transition: .4s;
+    border-radius: 30px;
+}
+
+.command-details .slider:before {
+    position: absolute;
+    content: "";
+    height: 24px;
+    width: 24px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+.command-details input:checked + .slider {
+    background-color: #1e90ff;
+}
+
+.command-details input:checked + .slider:before {
+    transform: translateX(30px);
+}
+
+.command-details .edit-button {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+    margin-left: 10px;
+    background-color: #555;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.command-details .edit-button:hover {
+    background-color: #1c86ee;
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(30, 144, 255, 0.5);
+}
+
+.command-details .controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.command-details .controls .edit-button {
+    margin-left: 10px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1050;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.8); /* Changed background color */
+    transition: opacity 0.3s ease-in-out;
+}
+
+.modal-content {
+    background-color: #1a2a3a;
+    margin: 5% auto;
+    padding: 30px;
+    border: 1px solid #333232;
+    width: 70%;
+    max-width: 700px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    animation: modalopen 0.5s;
+}
+
+@keyframes modalopen {
+    from { opacity: 0; transform: translateY(-50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #37597a;
+    padding-bottom: 15px;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.75em;
+    color: #ffffff;
+}
+
+.close {
+    color: #bbb;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-body {
+    padding: 25px 0;
+}
+
+.modal-body p {
+    margin: 0 0 25px;
+    font-size: 1.2em;
+    color: #ececec;
+}
+
+.modal-body textarea {
+    width: 100%;
+    height: 120px;
+    padding: 15px;
+    border: 1px solid #747171;
+    border-radius: 8px;
+    resize: none;
+    font-size: 1.1em;
+    color: #444;
+    transition: border-color 0.3s ease;
+}
+
+.modal-body textarea:focus {
+    border-color: #2980b9;
+    outline: none;
+}
+
+.shortcut-container {
+    margin-top: 25px;
+}
+
+.shortcut-container h4 {
+    margin-bottom: 15px;
+    font-size: 1.3em;
+    color: #ffffff;
+}
+
+.shortcut-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.shortcut-container ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease;
+}
+
+.shortcut-container ul li:hover {
+    background-color: #f1f1f1;
+}
+
+.shortcut-container ul li span {
+    font-size: 1.1em;
+    color: #666;
+}
+
+.shortcut-container ul li button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 7px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.shortcut-container ul li button:hover {
+    background-color: #c0392b;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.modal-footer button {
+    padding: 12px 25px;
+    margin-left: 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.save-button {
+    background-color: #3498db;
+    color: white;
+}
+
+.save-button:hover {
+    background-color: #2980b9;
+}
+
+.close-button {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.close-button:hover {
+    background-color: #c0392b;
+}

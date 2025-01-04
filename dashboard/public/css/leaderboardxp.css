@@ -1,0 +1,201 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #1a2a3a 0%, #2c3e50 100%);
+    color: #ecf0f1;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.leaderboard-container {
+    width: 95%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.leaderboard-title {
+    color: #1D2C3A; // لون الكتابة الكبيرة في الايمبد
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.leaderboard-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+.leaderboard-table th, .leaderboard-table td {
+    padding: 15px 10px;
+    text-align: left;
+    background-color: rgba(52, 152, 219, 0.2);
+    color: #1D2C3A; // لون المركز والاعضاء والاسم
+}
+
+.leaderboard-table th {
+    background-color: rgba(52, 152, 219, 0.4);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.leaderboard-table tr:first-child td:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.leaderboard-table tr:first-child td:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.leaderboard-table .position {
+    font-weight: 700;
+    font-size: 1.1em;
+    color: #1D2C3A; // لون ارقام التسلسل للمراكز
+}
+
+.leaderboard-table .username {
+    font-weight: 600;
+}
+
+.leaderboard-table .xp {
+    font-weight: 600;
+    color: #1D2C3A; // لون عدد النقاط للاعضاء كاملين
+}
+
+.current-user {
+    background-color: rgba(46, 204, 113, 0.3) !important;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    background-color: #1D2C3A;
+    color: #1D2C3A; // لون الكلام داخل الزر
+    border: none;
+    padding: 8px 15px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 0.9em;
+}
+
+.pagination button:hover {
+    background-color: #2980b9;
+}
+
+.pagination button:disabled {
+    background-color: #78B8E7; // لون الزر
+    cursor: not-allowed;
+}
+
+.user-stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    background-color: rgba(52, 152, 219, 0.2);
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.user-stats div {
+    text-align: center;
+    margin: 10px;
+}
+
+.user-stats h3 {
+    font-size: 1em;
+    margin-bottom: 5px;
+    color: #1D2C3A; // لون المستوى وعدد الاعضاء و النقاط
+}
+
+.user-stats p {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #1D2C3A; // لون عدد الارقام
+}
+
+@media (min-width: 576px) {
+    .leaderboard-container {
+        padding: 30px;
+        margin: 30px auto;
+    }
+
+    .leaderboard-title {
+        font-size: 2.5em;
+    }
+
+    .leaderboard-table th, .leaderboard-table td {
+        padding: 18px 15px;
+    }
+
+    .pagination button {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+}
+
+@media (min-width: 768px) {
+    .dashboard-container {
+        flex-direction: row;
+    }
+
+    .leaderboard-container {
+        margin: 40px auto;
+    }
+
+    .leaderboard-title {
+        font-size: 3em;
+    }
+
+    .user-stats {
+        flex-wrap: nowrap;
+    }
+}
+
+@media (min-width: 992px) {
+    .leaderboard-container {
+        padding: 40px;
+    }
+
+    .leaderboard-title {
+        font-size: 3.5em;
+        margin-bottom: 40px;
+    }
+
+    .leaderboard-table th, .leaderboard-table td {
+        padding: 20px;
+    }
+
+    .leaderboard-table .position, .leaderboard-table .username, .leaderboard-table .xp {
+        font-size: 1.2em;
+    }
+}
+
+@media (min-width: 1200px) {
+    .leaderboard-container {
+        max-width: 1200px;
+    }
+}

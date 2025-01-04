@@ -1,0 +1,691 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background-color: #78B8E7;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Global Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #272727;
+    color: #ecf0f1;
+}
+
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Improved Scrollbar Styles */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #2c3e50;
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #BC2019;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #BC2019;
+}
+
+
+/* Sidebar Styles */
+.sidebar {
+    width: 100%;
+    background: linear-gradient(135deg, #1D2C3A, #78B8E7);
+    color: #1D2C3A; // تغيير الايمبد اليسار من داشبورد
+    padding: 20px;
+    overflow-y: auto;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 1000;
+    box-shadow: 0 4px 25px rgba(0,0,0,0.4);
+}
+
+.sidebar-header {
+    text-align: center;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.bot-logo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    box-shadow: 0 0 20px rgba(52, 152, 219, 0.8);
+    transition: transform 0.6s ease, box-shadow 0.6s ease;
+    border: 4px solid #3498db; // لون اطار اللوقو
+}
+
+.bot-logo:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 0 30px rgba(52, 152, 219, 1);
+}
+
+.sidebar h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: #78B8E7; // لون الاسم عند اللوقو
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.sidebar nav ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.sidebar nav ul li {
+    margin: 10px;
+    width: calc(50% - 20px);
+}
+
+.sidebar nav ul li a {
+    color: #78B8E7; لون الاسماء في القائمة / /
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    border-radius: 10px;
+    transition: all 0.4s ease;
+    background-color: rgba(52, 73, 94, 0.7);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.sidebar nav ul li a:hover {
+    background-color: #092a34; //لون الايقونة صفحة واحد
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4);
+}
+
+.sidebar nav ul li a img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    filter: brightness(0) invert(1);
+    transition: transform 0.4s ease;
+}
+
+.sidebar nav ul li a:hover img {
+    transform: scale(1.2) rotate(10deg);
+}
+
+.sidebar nav ul li a span {
+    font-size: 1em;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.toggle-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: #78B8E7;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: transform 0.6s ease, color 0.4s ease;
+}
+
+.toggle-btn:hover {
+    transform: rotate(180deg);
+    color: #78B8E7;
+}
+
+/* Main Content Styles */
+.main-content {
+    flex-grow: 1;
+    padding: 20px; 
+    background: linear-gradient(135deg, #1D2C3A, #78B8E7); ////لون الايمبد الكامل داشبورد الاول 
+    min-height: 100vh;
+    transition: margin-left 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow-y: auto;
+}
+
+.dashboard-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 20px; 
+    background: linear-gradient(135deg, #1D2C3A, #78B8E7);
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+} 
+
+.welcome-message {
+    font-size: 2em;
+    color: #78B8E7;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.user-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.6);
+    border: 3px solid #3498db;
+    transition: transform 0.3s ease;
+}
+
+.user-avatar:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.user-tag {
+    font-size: 1.2em;
+    color: #78B8E7;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    font-weight: 600;
+}
+
+/* Profile Section Styles */
+.profile-section {
+    background-color: #1D2C3A; // قائمة البروفايل
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    margin-bottom: 30px;
+}
+
+.section-title {
+    font-size: 2em;
+    color: #78B8E7; // الكلام الي فوق
+    margin-bottom: 25px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    border-bottom: 3px solid #78B8E7;
+    padding-bottom: 10px;
+}
+
+.profile-card {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, #8f5a15, #1D2C3A); // لون البطاقة الخارجي
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    background: linear-gradient(135deg, #8f5a15, #8f5a15); // صورة الكارد
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+    animation: shine 4s infinite;
+}
+
+@keyframes shine {
+    0% {
+        transform: scale(0) rotate(0deg);
+    }
+    100% {
+        transform: scale(1) rotate(360deg);
+    }
+}
+
+.profile-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.6);
+    border: 4px solid #ecf0f1;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.profile-avatar:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.7);
+}
+
+.profile-name {
+    font-size: 2em;
+    color: #78B8E7; // لون الاسم في الكارد
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+    font-weight: 800;
+    text-align: center;
+}
+
+.profile-details {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 20px;
+}
+
+.detail-item {
+    background: #1D2C3A; // لون خلفية اسماء الكارد
+    padding: 15px;
+    border-radius: 10px;
+    transition: all 0.5s ease;
+    box-shadow: 6px 6px 12px rgba(0,0,0,0.3), -6px -6px 12px rgba(255,255,255,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.detail-item::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(52,152,219,0.2) 0%, rgba(52,152,219,0) 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.detail-item:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 8px 8px 16px rgba(0,0,0,0.4), -8px -8px 16px rgba(255,255,255,0.1);
+}
+
+.detail-item:hover::before {
+    opacity: 1;
+}
+
+.detail-label {
+    font-weight: bold;
+    color: #78B8E7; // الاسماء الي داخل  ايمبد الكارد
+    font-size: 1.1em;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.detail-value {
+    color: #78B8E7; // الارقام الي داخل الكارد
+    font-size: 1.3em;
+    font-weight: 700;
+}
+
+/* Improved Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.profile-section, .dashboard-header, .detail-item {
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+    .dashboard-container {
+        flex-direction: row;
+    }
+
+    .sidebar {
+        width: 250px;
+        height: 100vh;
+        position: fixed;
+    }
+
+    .main-content {
+        margin-left: 250px;
+    }
+
+    .sidebar nav ul {
+        flex-direction: column;
+    }
+
+    .sidebar nav ul li {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    .dashboard-header {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .user-info {
+        flex-direction: row;
+    }
+
+    .user-avatar {
+        margin-right: 15px;
+        margin-bottom: 0;
+    }
+
+    .profile-header {
+        flex-direction: row;
+    }
+
+    .profile-avatar {
+        margin-right: 25px;
+        margin-bottom: 0;
+    }
+
+    .profile-details {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .profile-details {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Server Section Styles */
+#admin-servers {
+    background-color: #8f5a15; // خلفية ايمبد تعديل السيرفرات
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    margin-bottom: 30px;
+}
+
+#admin-servers h2 {
+    font-size: 2em;
+    color: #78B8E7; // لون خط تعديل السيرفرات
+    margin-bottom: 25px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    border-bottom: 3px solid #78B8E7; // لون زر تعديل السيرفرات
+    padding-bottom: 10px;
+}
+
+.server-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.server-card {
+    background: linear-gradient(135deg, #78B8E7, #1D2C3A);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.server-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+}
+
+.server-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    border: 3px solid #78B8E7; // اطار صور السيرفر
+    transition: transform 0.3s ease;
+}
+
+.server-card:hover .server-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.server-card h3 {
+    font-size: 1.5em;
+    color: #78B8E7; // لون اسماء السيرفر
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.server-card p {
+    font-size: 1em;
+    color: #78B8E7; // لون اسم ميمبر في القائمة
+    margin-bottom: 15px;
+}
+
+.manage-server-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #78B8E7; // لون خلفية الزر
+    color: #78B8E7; // لون الزر
+    text-decoration: none;
+    border-radius: 25px;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(52, 152, 219, 0.4);
+}
+
+.manage-server-btn:hover {
+    background-color: #78B8E7; // لون كلام الزر
+    transform: scale(1.05);
+}
+
+/* Responsive Design for All Devices */
+@media (max-width: 1200px) {
+    .server-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .server-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    .sidebar.closed {
+        width: 100%;
+    }
+    .sidebar nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .sidebar nav ul li {
+        margin: 5px;
+    }
+    .sidebar nav ul li a {
+        flex-direction: column;
+        text-align: center;
+        padding: 12px;
+    }
+    .sidebar nav ul li a img {
+        width: 24px;
+        height: 24px;
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+    .main-content {
+        margin-left: 0;
+        padding: 15px;
+    }
+    .sidebar.closed + .main-content {
+        margin-left: 0;
+    }
+    .dashboard-header {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+    .welcome-message {
+        font-size: 2em;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    .user-info {
+        margin-top: 15px;
+    }
+    .user-avatar {
+        width: 60px;
+        height: 60px;
+        margin-right: 15px;
+    }
+    .user-tag {
+        font-size: 1.2em;
+    }
+    .profile-section {
+        padding: 25px;
+    }
+    .section-title {
+        font-size: 2em;
+        margin-bottom: 25px;
+    }
+    .profile-card {
+        border-radius: 15px;
+    }
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+        padding: 25px;
+    }
+    .profile-avatar {
+        width: 100px;
+        height: 100px;
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+    .profile-name {
+        font-size: 1.5em;
+    }
+    .profile-details {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 20px;
+    }
+    .detail-item {
+        padding: 10px;
+    }
+    .detail-label {
+        font-size: 0.9em;
+    }
+    .detail-value {
+        font-size: 1em;
+    }
+    .server-grid {
+        grid-template-columns: 1fr;
+    }
+    .server-card {
+        padding: 15px;
+    }
+    .server-icon {
+        width: 60px;
+        height: 60px;
+    }
+    .action-buttons {
+        grid-template-columns: 1fr;
+    }
+    .action-button {
+        padding: 12px;
+    }
+    .action-button i {
+        font-size: 1.5em;
+    }
+    .notifications-sidebar {
+        width: 100%;
+        position: relative;
+        height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .server-card h3 {
+        font-size: 1.3em;
+    }
+    .server-card p {
+        font-size: 0.9em;
+    }
+    .manage-server-btn {
+        padding: 8px 16px;
+        font-size: 0.9em;
+    }
+}
+
+/* Ensure touch-friendly targets on mobile */
+@media (hover: none) and (pointer: coarse) {
+    .manage-server-btn,
+    .action-button {
+        padding: 15px 25px;
+    }
+}
+
+/* High-resolution screens */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .server-icon,
+    .profile-avatar {
+        border-width: 2px;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: #121212;
+        color: #ffffff;
+    }
+    .server-card,
+    .action-button {
+        background: linear-gradient(135deg, #1e2a38, #1a242f);
+    }
+}
+
+/* Ensure content is readable on very small screens */
+@media (max-width: 320px) {
+    .sidebar nav ul li a span {
+        display: none;
+    }
+    .server-card h3 {
+        font-size: 1.1em;
+    }
+    .server-card p {
+        font-size: 0.8em;
+    }
+    .manage-server-btn {
+        padding: 6px 12px;
+        font-size: 0.8em;
+    }
+}

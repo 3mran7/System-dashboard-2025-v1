@@ -1,0 +1,107 @@
+.daily-reward-container {
+    background-color: rgba(37, 53, 68, 0.95);
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    padding: 5%;
+    text-align: center;
+    max-width: 90%;
+    width: 700px;
+    margin: 5% auto;
+    transition: all 0.5s ease;
+    border: 2px solid #5dddbd;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.daily-reward-container:hover {
+    transform: translateY(calc(-50% - 8px)) scale(1.02);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+.daily-reward-title {
+    color: #5dddbd;
+    font-size: clamp(24px, 5vw, 42px);
+    margin-bottom: 5%;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.reward-amount {
+    font-size: clamp(36px, 8vw, 62px);
+    color: #f0f0f0;
+    margin-bottom: 5%;
+    font-weight: bold;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(45deg, #5dddbd, #4ecca3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.claim-button {
+    background: linear-gradient(45deg, #5dddbd, #4ecca3);
+    color: #1a1a2e;
+    border: none;
+    padding: 15px 30px;
+    font-size: clamp(16px, 3vw, 22px);
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 5px 15px rgba(78, 204, 163, 0.3);
+}
+
+.claim-button:hover {
+    background: linear-gradient(45deg, #4ecca3, #5dddbd);
+    transform: translateY(-7px);
+    box-shadow: 0 8px 20px rgba(78, 204, 163, 0.5);
+}
+
+.claim-button:disabled {
+    background: linear-gradient(45deg, #2c7a64, #3a9e80);
+    cursor: not-allowed;
+    opacity: 0.7;
+    box-shadow: none;
+}
+
+.countdown {
+    margin-top: 5%;
+    font-size: clamp(18px, 4vw, 24px);
+    color: #f0f0f0;
+    font-weight: 500;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.reward-amount {
+    animation: pulse 2s infinite;
+}
+
+@media screen and (max-width: 768px) {
+    .daily-reward-container {
+        padding: 8%;
+        max-width: 95%;
+    }
+
+    .claim-button {
+        padding: 12px 24px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .daily-reward-container {
+        padding: 10%;
+    }
+
+    .claim-button {
+        padding: 10px 20px;
+    }
+}

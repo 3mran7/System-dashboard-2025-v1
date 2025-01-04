@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Bot Dashboard - Login</title>
+    <link rel="icon" href="/images/bot-logo.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/Login.css">
+    <script src="/js/login.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="/api">API</a></li>
+            </ul>
+        </nav>
+        <h1>مرحبا بك في لوحة التحكم</h1>
+        <p>هنا الداشبورد الخاص في البوت لجعل سيرفرك يعمل بشكل افضل</p>
+    </header>
+
+    <main>
+        <section id="login">
+            <h2>Login to Access Dashboard</h2>
+            <% if (locals.error) { %>
+                <p class="error"><%= error %></p>
+            <% } %>
+            <div class="button-container">
+                <form action="/auth/discord" method="GET">
+                    <button type="submit" class="discord-login-btn">
+                        <img src="/images/discord-logo.png" alt="Discord Logo">
+                        Login with Discord
+                    </button>
+                </form>
+                <a href="https://discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID&permissions=8&scope=bot%20applications.commands" class="add-bot-btn">Add Bot to Discord</a>
+            </div>
+            <p class="login-info">Securely authenticate using your Discord account to access all dashboard features.</p>
+        </section>
+
+        <section id="features">
+            <h2>Bot Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <img src="/images/server-management.png" alt="Server Management Icon">
+                    <h3>Advanced Server Management</h3>
+                    <p>Streamline your server operations with powerful moderation tools, custom commands, and role management.</p>
+                </div>
+                <div class="feature-card">
+                    <img src="/images/economy.png" alt="Economy System Icon">
+                    <h3>Comprehensive Economy System</h3>
+                    <p>Engage your community with a full-featured economy system, including currency, shops, and user-driven markets.</p>
+                </div>
+                <!-- <div class="feature-card">
+                    <img src="/images/entertainment.png" alt="Entertainment Icon">
+                    <h3>Diverse Entertainment Commands</h3>
+                    <p>Keep your server lively with mini-games, quizzes, music integration, and fun interactive commands.</p>
+                </div> -->
+            </div>
+        </section>
+
+        <section id="stats">
+            <h2>Bot Statistics</h2>
+            <div class="stat-container">
+                <div class="stat-item">
+                    <span class="stat-number">1000+</span>
+                    <span class="stat-label">Servers</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">500K+</span>
+                    <span class="stat-label">Users</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">99.9%</span>
+                    <span class="stat-label">Uptime</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="/terms">Terms of Service</a></li>
+                    <li><a href="/privacy">Privacy Policy</a></li>
+                    <li><a href="/support">Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-icons">
+                    <a href="#" class="social-icon"><img src="/images/discord-logo.png" alt="Discord"></a>
+                    <a href="#" class="social-icon"><img src="/images/twitter.png" alt="Twitter"></a>
+                    <a href="#" class="social-icon"><img src="/images/github.png" alt="GitHub"></a>
+                </div>
+            </div>
+        </div>
+        <p>&copy; 2025 MAYOR HOST All rights reserved.</p>
+    </footer>
+</body>
+</html>

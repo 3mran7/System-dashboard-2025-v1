@@ -1,0 +1,193 @@
+/* General styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #78B8E7;
+    margin: 0;
+    padding: 0;
+    color: #78B8E7; // لون اسم السيرفرات
+}
+
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
+
+/* Analytics container */
+.analytics-container {
+    background-color: rgba(37, 53, 68, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    transition: all 0.4s ease;
+}
+
+.analytics-title {
+    color: #78B8E7; // اسم قائمة السيرفرات او الاسم فوق
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Server stats */
+.server-stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-bottom: 30px;
+}
+
+.server-stats div {
+    text-align: center;
+    background-color: rgba(52, 73, 94, 0.8);
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    transition: all 0.4s ease;
+    flex: 1 1 200px;
+    margin: 10px;
+}
+
+.server-stats h3 {
+    color: #78B8E7; // لون الاسماء داخل ايمبد عدد السيرفرات و عدد الاعضاء
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.server-stats p {
+    color: #78B8E7; // لون الارقام لعدد السيرفرات وعدد الاعضاء
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Server table */
+.server-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+}
+
+.server-table th,
+.server-table td {
+    padding: 12px;
+    text-align: left;
+}
+
+.server-table th {
+    background-color: #1D2C3A; // ايمبد شرح المراكز واسماء السيرفرات والاعضاء
+    color: #78B8E7; // لون الكلام داخل الايمبد
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 8px 8px 0 0;
+}
+
+.server-table tr {
+    background-color: rgba(15, 52, 96, 0.8);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
+}
+
+.rank {
+    font-weight: bold;
+    color: #78B8E7; // لون رقم تسلسل المراكز
+    font-size: 16px;
+}
+
+.server-name {
+    display: flex;
+    align-items: center;
+}
+
+.server-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.member-count {
+    color: #78B8E7; // لون عدد الاعضاء بالسيرفرات
+    font-weight: 600;
+    font-size: 16px;
+}
+
+/* Responsive design */
+@media (min-width: 768px) {
+    .dashboard-container {
+        flex-direction: row;
+    }
+
+    .main-content {
+        padding: 30px;
+    }
+
+    .analytics-container {
+        padding: 35px;
+    }
+
+    .analytics-title {
+        font-size: 32px;
+    }
+
+    .server-stats div {
+        padding: 25px;
+    }
+
+    .server-stats h3 {
+        font-size: 20px;
+    }
+
+    .server-stats p {
+        font-size: 32px;
+    }
+
+    .server-table th,
+    .server-table td {
+        padding: 18px;
+    }
+
+    .rank {
+        font-size: 18px;
+    }
+
+    .server-icon {
+        width: 50px;
+        height: 50px;
+        margin-right: 20px;
+    }
+
+    .member-count {
+        font-size: 18px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .analytics-container:hover {
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+        transform: translateY(-5px);
+    }
+
+    .server-stats div:hover {
+        transform: translateY(-8px) scale(1.05);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .server-table tr:hover {
+        background-color: rgba(26, 26, 46, 0.9);
+        transform: scale(1.03);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+}

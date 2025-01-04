@@ -1,0 +1,287 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Dashboard</title>
+    <link rel="icon" href="/images/bot-logo.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/commands.css">
+    <link rel="stylesheet" href="/css/server.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #444;
+            color: #fff;
+            padding: 20px 25px;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: opacity 0.4s ease, bottom 0.4s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-family: 'Arial', sans-serif;
+            font-size: 16px;
+        }
+
+        .notification.show {
+            opacity: 1;
+            bottom: 50px;
+        }
+
+        .notification.success {
+            background-color: #5cb85c;
+        }
+
+        .notification.error {
+            background-color: #d9534f;
+        }
+
+        .close-notification {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <aside id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <img src="/images/bot-logo.png" alt="System Bot Logo" class="bot-logo">
+            <h2>MAYOR HOST</h2>
+            <button class="toggle-btn" onclick="toggleSidebar()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/dashboard"><img src="/images/icons/user.png" alt="User Profile Icon"> <span>معلومات الحساب</span></a></li>
+                <li><a href="/dashboard"><img src="/images/icons/server.png" alt="Managed Servers Icon"> <span>تعديل سيرفراتك</span></a></li>
+                <li><a href="/commands"><img src="/images/icons/terminal.png" alt="Commands Icon"> <span>الاوامر</span></a></li>
+                <li><a href="/leaderboards/coins"><img src="/images/icons/coins.png" alt="Coins Leaderboard Icon"> <span>توب العملة</span></a></li>
+                <li><a href="/leaderboards/xp"><img src="/images/icons/star.png" alt="XP Leaderboard Icon"> <span>توب المستوى</span></a></li>
+                <li><a href="/settings"><img src="/images/icons/cog.png" alt="Settings Icon"> <span>الاعدادات</span></a></li>
+                <li><a href="/analytics"><img src="/images/icons/chart-bar.png" alt="Analytics Icon"> <span>توب السيرفرات</span></a></li>
+                <li><a href="/daily-reward"><img src="/images/icons/gift.png" alt="Daily Reward Icon"> <span>المكافاة اليومية</span></a></li>
+                
+                <li><a href="/logout"><img src="/images/icons/sign-out.png" alt="Logout Icon"> <span>تسجيل خروج</span></a></li>
+            </ul>
+        </nav>
+    </aside>
+    <main class="main-content">
+
+        <div class="command-action">
+            <% commands.forEach(command => { %>
+                <div class="command-details" onclick="openModal('<%= command.name %>')">
+                    <h4><%= command.name %></h4>
+                    <label class="switch" onclick="event.stopPropagation()">
+                        <% console.log(command.enabled) %>
+                        <input type="checkbox" <%= command.enabled ? 'checked' : '' %> onclick="toggleCommand('<%= command.name %>', this.checked ? 'enable' : 'disable')" <%= command.enabled ? 'checked' : '' %>>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            <% }); %>
+        </div>
+        <div id="commandModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <h2 id="modalTitle">Command Name</h2>
+                </div>
+                <div class="modal-body">
+                    <p id="modalDescription">اضافة اختصار للاوامر</p>
+                    <textarea id="commandInput" placeholder="اكتب الاختصار لهذا الامر"></textarea>
+                    <div class="shortcut-container">
+                        <h4>الاختصارات</h4>
+                        <ul id="shortcutList">
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="save-button" onclick="saveCommand()">حفظ</button>
+                    <button class="close-button" onclick="closeModal()">الغاء</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('closed');
+            const mainContent = document.querySelector('.main-content');
+            if (sidebar.classList.contains('closed')) {
+                mainContent.style.marginLeft = '80px';
+            } else {
+                mainContent.style.marginLeft = '300px';
+            }
+        }
+
+        function openModal(commandName) {
+            var modal = document.getElementById('commandModal');
+            var modalTitle = document.getElementById('modalTitle');
+            var modalDescription = document.getElementById('modalDescription');
+            var commandInput = document.getElementById('commandInput');
+            modalTitle.textContent = commandName;
+            modalDescription.textContent = 'Add Shortcuts to this command.';
+            commandInput.value = '';
+            modal.style.display = 'block';
+            var shortcutList = document.getElementById('shortcutList');
+            shortcutList.innerHTML = '';
+            getShortcutsForCommand(commandName).then(shortcuts => {
+                shortcuts.forEach(shortcut => {
+                    var li = document.createElement('li');
+                    li.innerHTML = `<span>${shortcut}</span><button onclick="removeShortcut('${shortcut}')">Remove</button>`;
+                    shortcutList.appendChild(li);
+                });
+            }).catch(error => {
+                console.error('Error fetching shortcuts:', error);
+            });
+        }
+
+        function closeModal() {
+            var modal = document.getElementById('commandModal');
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            var modal = document.getElementById('commandModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+        async function getShortcutsForCommand(commandName) {
+            const serverId = '<%= server.id %>'; // Assuming server ID is available in the template
+            console.log(serverId);
+            try {
+                const response = await fetch(`/shortcuts/${serverId}/${commandName}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch shortcuts');
+                }
+                const data = await response.json();
+                if (!data.shortcuts) {
+                    throw new Error('No shortcuts found');
+                }
+                return data.shortcuts;
+            } catch (error) {
+                console.error('Error fetching shortcuts:', error);
+                return [];
+            }
+        }
+
+        async function removeShortcut(shortcut) {
+            const serverId = '<%= server.id %>'; // Assuming server ID is available in the template
+            const commandName = document.getElementById('modalTitle').textContent; // Assuming command name is in the modal title
+            try {
+                const response = await fetch(`/removeShortcut/${serverId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ shortcut: shortcut, serverId: serverId, command: commandName })
+                });
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || 'Network response was not ok');
+                }
+                const result = await response.json();
+                showNotification('success', 'Shortcut removed successfully: ' + result.message);
+                // Remove the shortcut from the list in the UI
+                const shortcutList = document.getElementById('shortcutList');
+                const items = shortcutList.getElementsByTagName('li');
+                for (let i = 0; i < items.length; i++) {
+                    if (items[i].textContent.includes(shortcut)) {
+                        shortcutList.removeChild(items[i]);
+                        break;
+                    }
+                }
+            } catch (error) {
+                showNotification('error', 'There was a problem with removing the shortcut: ' + error.message);
+            }
+        }
+
+        async function saveCommand() {
+            var commandInput = document.getElementById('commandInput').value;
+            var serverId = '<%= server.id %>';
+            var commandName = document.getElementById('modalTitle').textContent;
+            console.log(serverId);
+            if (commandInput.trim() !== '') {
+                var shortcutList = document.getElementById('shortcutList');
+                var li = document.createElement('li');
+                li.innerHTML = `<span>${commandInput}</span><button onclick="removeShortcut('${commandInput}')">Remove</button>`;
+                shortcutList.appendChild(li);
+                document.getElementById('commandInput').value = '';
+                try {
+                    const response = await fetch('/saveShortcut/' + serverId, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ shortcut: commandInput, serverId: serverId, command: commandName })
+                    });
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.message || 'Network response was not ok');
+                    }
+                    const result = await response.json();
+                    showNotification('success', 'Shortcut saved successfully: ' + result.message);
+                } catch (error) {
+                    showNotification('error', 'There was a problem with saving the shortcut: ' + error.message);
+                }
+            } else {
+                showNotification('error', 'Please enter a valid shortcut.');
+            }
+        }
+
+        function showNotification(type, message) {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `<span>${message}</span><button class="close-notification" onclick="closeNotification(this)">×</button>`;
+            document.body.appendChild(notification);
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 10);
+            setTimeout(() => {
+                closeNotification(notification);
+            }, 5000);
+        }
+
+        function closeNotification(element) {
+            if (element.parentElement) {
+                element.parentElement.classList.remove('show');
+                setTimeout(() => {
+                    location.reload();
+                }, 300);
+            }
+        }
+
+        async function toggleCommand(commandName, action) {
+            const serverId = '<%= server.id %>';
+            const enabled = action === 'enable';
+            try {
+                const response = await fetch(`/toggleCommand/${serverId}/${commandName}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ enabled })
+                });
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || 'Network response was not ok');
+                }
+                const result = await response.json();
+                showNotification('success', 'Command toggled successfully: ' + result.message);
+            } catch (error) {
+                showNotification('error', 'There was a problem with toggling the command: ' + error.message);
+            }
+        }
+    </script>
+</body>
+</html>

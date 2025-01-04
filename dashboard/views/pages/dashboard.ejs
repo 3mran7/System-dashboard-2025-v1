@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - System Bot</title>
+    <link rel="icon" href="/images/bot-logo.png" type="image/x-icon">
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <img src="/images/bot-logo.png" alt="System Bot Logo" class="bot-logo">
+                <h2>MAYOR HOST</h2>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#user-profile"><img src="/images/icons/user.png" alt="User Profile Icon"> <span>معلومات الحساب</span></a></li>
+                    <li><a href="#admin-servers"><img src="/images/icons/server.png" alt="Managed Servers Icon"> <span>تعديل سيرفراتك</span></a></li>
+                    <li><a href="/commands"><img src="/images/icons/terminal.png" alt="Commands Icon"> <span>الاوامر</span></a></li>
+                    <li><a href="/leaderboards/coins"><img src="/images/icons/coins.png" alt="Coins Leaderboard Icon"> <span>توب العملة</span></a></li>
+                    <li><a href="/leaderboards/xp"><img src="/images/icons/star.png" alt="XP Leaderboard Icon"> <span>توب المستوى</span></a></li>
+                    <li><a href="/settings"><img src="/images/icons/cog.png" alt="Settings Icon"> <span>الاعدادات</span></a></li>
+                    <li><a href="/analytics"><img src="/images/icons/chart-bar.png" alt="Analytics Icon"> <span>توب السيرفرات</span></a></li>
+                    <li><a href="/daily-reward"><img src="/images/icons/gift.png" alt="Daily Reward Icon"> <span>المكافاة اليومية</span></a></li>
+                    
+                    <li><a href="/logout"><img src="/images/icons/sign-out.png" alt="Logout Icon"> <span>تسجيل خروج</span></a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <section id="user-profile" class="profile-section">
+                <h2 class="section-title">معلومات الحساب</h2>
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png" alt="User Avatar" class="profile-avatar">
+                        <h3 class="profile-name"><%= user.username %>#<%= user.discriminator %></h3>
+                    </div>
+                    <div class="profile-details">
+                        <div class="detail-item">
+                            <span class="detail-label">ايدي الحساب:</span>
+                            <span class="detail-value"><%= user.id %></span>
+                        </div>
+        
+                        <div class="detail-item">
+                            <span class="detail-label">الكردت:</span>
+                            <span class="detail-value"><%= balance && balance.wallet ? balance.wallet : 0 %> coins</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">المستوى:</span>
+                            <span class="detail-value"><%= level && level.level ? level.level : 0 %></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">النقاط:</span>
+                            <span class="detail-value"><%= xp && xp.xp ? xp.xp : 0 %> / <%= xp && xp.xpNeeded ? xp.xpNeeded : 0 %></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="admin-servers">
+                <h2>تعديل سيرفراتك</h2>
+                <div class="server-grid">
+                    <% adminGuilds.forEach(guild => { %>
+                        <div class="server-card">
+                            <% if (guild.icon) { %>
+                                <img src="https://cdn.discordapp.com/icons/<%= guild.id %>/<%= guild.icon %>.png" alt="<%= guild.name %>" class="server-icon">
+                            <% } else { %>
+                                <% const canvas = createCanvas(100, 100); %>
+                                <% const ctx = canvas.getContext('2d'); %>
+                                <% ctx.fillStyle = '#' + Math.floor(Math.random()*16777215).toString(16); %>
+                                <% ctx.fillRect(0, 0, 100, 100); %>
+                                <% ctx.font = 'bold 40px Roboto'; %>
+                                <% ctx.fillStyle = '#FFFFFF'; %>
+                                <% ctx.textAlign = 'center'; %>
+                                <% ctx.textBaseline = 'middle'; %>
+                                <% ctx.fillText(guild.name.slice(0, 2).toUpperCase(), 50, 50); %>
+                                <% const dataUrl = canvas.toDataURL(); %>
+                                <img src="<%= dataUrl %>" alt="<%= guild.name %>" class="server-icon">
+                            <% } %>
+                            <h3><%= guild.name %></h3>
+                            <p>Members: <%= guild.memberCount %></p>
+                            <a href="/dashboard/<%= guild.id %>" class="manage-server-btn">تعديل السيرفر</a>
+                        </div>
+                    <% }); %>
+                </div>
+            </section>
+
+            <section id="quick-actions">
+                <h2>تحكم سريع</h2>
+                <div class="action-buttons">
+                    <a href="/commands" class="action-button">
+                        <i class="fas fa-terminal"></i>
+                        <span>تعديل الاوامر</span>
+                    </a>
+                    <a href="/leaderboards/coins" class="action-button">
+                        <i class="fas fa-coins"></i>
+                        <span>توب العملة</span>
+                    </a>
+                    <a href="/leaderboards/xp" class="action-button">
+                        <i class="fas fa-star"></i>
+                        <span>توب المستوى</span>
+                    </a>
+                    <a href="/settings" class="action-button">
+                        <i class="fas fa-cog"></i>
+                        <span>تعديل البروفايل</span>
+                    </a>
+                    <a href="/analytics" class="action-button">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>توب السيرفرات</span>
+                    </a>
+                    <a href="/daily-reward" class="action-button">
+                        <i class="fas fa-gift"></i>
+                        <span>المكافاة اليومية</span>
+                    </a>
+                    <a href="/currency" class="action-button">
+                        <i class="fas fa-exchange-alt"></i>
+                        <span>تحويل العملة</span>
+                    </a>
+                    <a href="/logout" class="action-button">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>تسجيل الخروج</span>
+                    </a>
+                </div>
+            </section>
+
+            <style>
+                #quick-actions {
+                    background: linear-gradient(135deg, #2c3e50, #34495e);
+                    border-radius: 15px;
+                    padding: 20px;
+                    margin-top: 30px;
+                    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+                }
+
+                #quick-actions h2 {
+                    color: #ecf0f1;
+                    font-size: 1.8em;
+                    margin-bottom: 20px;
+                    text-align: center;
+                    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+                }
+
+                .action-buttons {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                    gap: 15px;
+                }
+
+                .action-button {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    background: #3498db;
+                    color: #ecf0f1;
+                    text-decoration: none;
+                    padding: 15px;
+                    border-radius: 10px;
+                    transition: all 0.3s ease;
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                }
+
+                .action-button:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+                    background: #2980b9;
+                }
+
+                .action-button i {
+                    font-size: 1.5em;
+                    margin-bottom: 8px;
+                }
+
+                .action-button span {
+                    font-size: 0.9em;
+                    text-align: center;
+                }
+
+                /* For large screens */
+                @media (min-width: 1200px) {
+                    .action-buttons {
+                        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                    }
+                    .action-button {
+                        padding: 20px;
+                    }
+                    .action-button i {
+                        font-size: 2em;
+                        margin-bottom: 12px;
+                    }
+                    .action-button span {
+                        font-size: 1.1em;
+                    }
+                }
+
+                /* For medium screens */
+                @media (min-width: 768px) and (max-width: 1199px) {
+                    .action-buttons {
+                        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+                    }
+                    .action-button {
+                        padding: 15px;
+                    }
+                    .action-button i {
+                        font-size: 1.7em;
+                        margin-bottom: 10px;
+                    }
+                    .action-button span {
+                        font-size: 1em;
+                    }
+                }
+
+                /* For small screens */
+                @media (min-width: 481px) and (max-width: 767px) {
+                    .action-buttons {
+                        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                    }
+                    .action-button {
+                        padding: 12px;
+                    }
+                    .action-button i {
+                        font-size: 1.5em;
+                        margin-bottom: 8px;
+                    }
+                    .action-button span {
+                        font-size: 0.9em;
+                    }
+                }
+
+                /* For extra small screens */
+                @media (max-width: 480px) {
+                    .action-buttons {
+                        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                    }
+                    .action-button {
+                        padding: 10px;
+                    }
+                    .action-button i {
+                        font-size: 1.2em;
+                        margin-bottom: 5px;
+                    }
+                    .action-button span {
+                        font-size: 0.8em;
+                    }
+                }
+            </style>
+
+        </main>
+    
+    <script src="/js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Bot API Documentation</title>
+    <link rel="stylesheet" href="/css/api.css">
+    <script src="/js/api.js" defer></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/features">Features</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/api">API</a></li>
+            </ul>
+        </nav>
+        <h1>System Bot API Documentation</h1>
+    </header>
+
+    <main>
+        <section id="introduction">
+            <h2>Introduction</h2>
+            <p>Welcome to the System Bot API documentation. This guide will help you understand and utilize our API endpoints to retrieve user information.</p>
+        </section>
+        <section id="endpoints">
+            <h2>API Endpoints</h2>
+
+            <div class="endpoint">
+                <h3>Get All Users</h3>
+                <p><strong>GET</strong> /api/users</p>
+                <p>Retrieve information about all users.</p>
+            </div>
+
+            <div class="endpoint">
+                <h3>Get User Information</h3>
+                <p><strong>GET</strong> /api/users/:userId</p>
+                <p>Retrieve information about a specific user, including their user details and balance.</p>
+            </div>
+        </section>
+        <section id="examples">
+            <h2>Usage Examples</h2>
+            <h3>Get All Users</h3>
+            <div class="code-container">
+                <pre><code>const allUsers = await fetch('http://localhost:3000/api/users')</code></pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>This example demonstrates how to retrieve information about all users using the API.</p>
+
+            <h3>Get User Information</h3>
+            <div class="code-container">
+                <pre><code>const userData = await fetch(`http://localhost:3000/api/users/${userId}`)</code></pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>This example demonstrates how to retrieve a specific user's information and balance using the API.</p>
+        </section>
+
+        <section id="rate-limits">
+            <h2>Rate Limits</h2>
+            <p>Our API is rate limited to ensure fair usage. You can make up to 100 requests per minute. If you exceed this limit, you'll receive a 429 Too Many Requests response.</p>
+        </section>
+    </main>
+    <script>
+        function copyCode(button) {
+            const codeContainer = button.previousElementSibling;
+            const codeText = codeContainer.textContent;
+            
+            navigator.clipboard.writeText(codeText).then(() => {
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                button.textContent = 'Failed to copy';
+            });
+        }
+    </script>
+
+    <footer>
+        <p>&copy; 2025 MAYOR HOST All rights reserved.</p>
+    </footer>
+</body>
+</html>

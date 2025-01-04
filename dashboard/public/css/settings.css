@@ -1,0 +1,185 @@
+.analytics-container {
+    background: linear-gradient(135deg, #78B8E7, #1D2C3A); // الوان الخاصة بالبطاقة كاملة 
+    border-radius: 25px;
+    padding: 40px;
+    transition: all 0.3s ease;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.analytics-title {
+    font-size: 36px;
+    margin-bottom: 30px;
+    color: #1D2C3A; // لون اول كلام في الايمبد
+    font-weight: 700;
+    text-align: center;
+    animation: slideInDown 0.5s ease-in-out;
+}
+
+@keyframes slideInDown {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.server-stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.server-stats div {
+    background: rgba(236, 240, 241, 0.15);
+    border-radius: 15px;
+    padding: 20px;
+    width: calc(50% - 10px);
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+    animation: scaleIn 0.5s ease-in-out;
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.server-stats h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #1D2C3A;
+    font-weight: 600;
+}
+
+.server-stats p {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1D2C3A;
+    animation: countUp 1s ease-out;
+}
+
+@keyframes countUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.server-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 15px;
+    margin-top: 30px;
+    animation: fadeInUp 0.5s ease-in-out;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.server-table th,
+.server-table td {
+    padding: 15px;
+    text-align: left;
+    background: rgba(236, 240, 241, 0.15);
+    transition: all 0.3s ease;
+}
+
+.server-table th {
+    background: rgba(236, 240, 241, 0.25);
+    font-weight: 700;
+    color: #1D2C3A; // لون الكلام في اول سطر بالايمبد
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    background: rgba(236, 240, 241, 0.15);
+    color: #1D2C3A; // لون الروابط او الكلام الذي تكتبه
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    background: rgba(236, 240, 241, 0.25);
+    animation: pulse 0.5s ease-in-out;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.form-check-input {
+    margin-right: 10px;
+    transform: scale(1.5);
+    transition: all 0.3s ease;
+}
+
+.form-check-input:checked {
+    animation: bounce 0.5s ease-in-out;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-5px); }
+    60% { transform: translateY(-3px); }
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #1D2C3A, #2980b9); // لون الزر الخاص بالحفظ
+    color: #ecf0f1;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+@media (max-width: 768px) {
+    .analytics-container {
+        padding: 20px;
+    }
+
+    .analytics-title {
+        font-size: 28px;
+    }
+
+    .server-stats div {
+        width: 100%;
+    }
+
+    .server-table th,
+    .server-table td {
+        padding: 10px;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 10px;
+    }
+}
