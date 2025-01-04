@@ -51,7 +51,7 @@ app.locals.include = ejs.include;
 passport.use(new DiscordStrategy({
     clientID: config.clientId,
     clientSecret: config.clientSecret,
-    callbackURL: '', // هنا تحط ادريس الهوست
+    callbackURL: 'http:///auth/discord/callback', // هنا تحط ادريس الهوست
     scope: ['identify', 'guilds']
 }, (accessToken, refreshToken, profile, done) => {
     done(null, profile);
