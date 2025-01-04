@@ -26,7 +26,7 @@ const upload = multer({ storage: storage });
 
 module.exports = (client) => {
 const app = express();
-const PORT = process.env.PORT || 9503;
+const PORT = process.env.PORT || 9503; // هنا تحط بورت الهوست
 
 const apiRoutes = require('../api/src/routes/api');
 
